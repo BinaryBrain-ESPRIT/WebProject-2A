@@ -6,15 +6,15 @@ class Product
 {
     public int $id;
     public string $brand;
-    public string $type;
+    public string $name;
     public float $price;
 
-    public function __construct(int $id, string $brand,string $type,float $price)
+    public function __construct(int $id, string $brand,string $name,float $price)
     {
         $this->id = $id;
         $this->brand = $brand;
         $this->price = $price;
-        $this->type = $type;
+        $this->$name = $name;
     }
 
 }
