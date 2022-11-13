@@ -1,3 +1,15 @@
+<?php
+declare(strict_types=1);
+include_once __DIR__ . "/../../Controller/Cart.php";
+include_once __DIR__ . "/../../Model/Cart.php";
+include_once __DIR__ . "/../../Model/CartProducts.php";
+
+$cartM = new Model\Cart(1, 1);
+$cartC = new Controller\Cart();
+$cartProducts = $cartC->getCartPurchases(1);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +105,7 @@
                     <br>
                     <br>
                     <h2>Check your <em>Cart</em></h2>
-<!--                    <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>-->
+                    <!--<p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>-->
                 </div>
             </div>
         </div>
@@ -109,6 +121,9 @@
                     <div class="col align-self-center text-right text-muted">3 items</div>
                 </div>
             </div>
+            <?php
+            foreach ($cartProducts as $cartProd) {
+            ?>
             <div class="row border-top border-bottom">
                 <div class="row main align-items-center">
                     <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
@@ -117,37 +132,15 @@
                         <div class="row">Cotton T-shirt</div>
                     </div>
                     <div class="col">
-                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                        <a href="#">-</a><a href="#" class="border"><?=$cartProd['qte'] ?></a><a href="#">+</a>
                     </div>
-                    <div class="col">&euro; 44.00 <a href="#" class="close">&#10005;</a></div>
+                    <div class="col">&euro; <?=$cartProd["totalPrice"] ?> <a href="#" class="close">&#10005;</a></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
-                    </div>
-                    <div class="col">
-                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                    </div>
-                    <div class="col">&euro; 44.00 <a href="#" class="close">&#10005;</a></div>
-                </div>
-            </div>
-            <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
-                    </div>
-                    <div class="col">
-                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                    </div>
-                    <div class="col">&euro; 44.00 <a href="#" class="close">&#10005;</a></div>
-                </div>
-            </div>
+            <?php
+            }
+            ?>
+
             <div class="back-to-shop"><a href="#">&leftarrow;</a><a href="#" class="text-muted">Back to shop</a></div>
         </div>
         <div class="col-md-4 summary">
@@ -159,7 +152,9 @@
             </div>
             <form>
                 <p>SHIPPING</p>
-                <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                <select>
+                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                </select>
                 <p>GIVE CODE</p>
                 <input id="code" placeholder="Enter your code">
             </form>
