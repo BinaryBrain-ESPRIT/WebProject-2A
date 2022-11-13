@@ -1,8 +1,35 @@
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a684e5df675dfa5b7a3551fb3f66361e48e47736
+<?php
+include '../Controller/user.php';
+$error = "";
+// create client
+$user = null;
+// create an instance of the controller
+$user = new User();
+if (
+    isset($_POST["email"]) &&
+    isset($_POST["password"]) &&
+    isset($_POST["name"]) &&
+    isset($_POST["age"])
+) {
+    if (
+        !empty($_POST["email"]) &&
+        !empty($_POST["password"]) &&
+        !empty($_POST["name"]) &&
+        !empty($_POST["age"])
+    ) {
+        $user = new User(
+            null,
+            $_POST["email"],
+            $_POST["password"],
+            $_POST["name"],
+            $_POST["age"]
+        );
+        $user->addUser($user);
+        header('Location:Display_User.php');
+    } else
+        $error = "Missing information";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
