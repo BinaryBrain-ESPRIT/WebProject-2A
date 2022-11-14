@@ -1,3 +1,28 @@
+<?php
+
+include_once __DIR__ . "/../../../../Model/UsedCar.php";
+include_once __DIR__ . "/../../../../Controller/UsedCar.php";
+
+if (isset($_POST['category']) && isset($_POST['brand']) && isset($_POST['model']) && isset($_POST['cylinder']) && isset($_POST['energy']) && isset($_POST['fiscalPower']) && isset($_POST['gearbox']) && isset($_POST['registerNumber']) && isset($_POST['year']) && isset($_POST['kilometers'])) {
+    $category = $_POST['category'];
+    $brand = $_POST['brand'];
+    $model = $_POST['model'];
+    $cylinder = $_POST['cylinder'];
+    $energy = $_POST['energy'];
+    $fiscalPower = $_POST['fiscalPower'];
+    $gearbox = $_POST['gearbox'];
+    $registerNumber = $_POST['registerNumber'];
+    $year = $_POST['year'];
+    $kilometers = $_POST['kilometers'];
+
+    $car = new Model\UsedCar($category, $brand, $model, $cylinder, $energy, $fiscalPower, $gearbox, $registerNumber, $year, $kilometers);
+    $carC = new Controller\UsedCar();
+    $carC->addCar($car);
+    header('location: Display_UsedCar.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,34 +31,40 @@
     <title>Karhabti TN | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-          rel="stylesheet"/>
+    <link
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+            rel="stylesheet"
+    />
     <!-- Font Awesome -->
     <link href="../../plugins/fontawesome-free/css/all.min.css" rel="stylesheet"/>
     <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+    <link
+            href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+            rel="stylesheet"
+    />
     <!-- Tempusdominus Bootstrap 4 -->
-    <link href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+    <link
+            href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
+            rel="stylesheet"
+    />
     <!-- iCheck -->
-    <link href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet"/>
+    <link
+            href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+            rel="stylesheet"
+    />
     <!-- JQVMap -->
     <link href="../../plugins/jqvmap/jqvmap.min.css" rel="stylesheet"/>
     <!-- Theme style -->
     <link href="../../dist/css/adminlte.min.css" rel="stylesheet"/>
     <!-- overlayScrollbars -->
-    <link href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet"/>
+    <link
+            href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
+            rel="stylesheet"
+    />
     <!-- Daterange picker -->
     <link href="../../plugins/daterangepicker/daterangepicker.css" rel="stylesheet"/>
     <!-- summernote -->
     <link href="../../plugins/summernote/summernote-bs4.min.css" rel="stylesheet"/>
-
-    <!-- DataTables -->
-    <link href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet">
-    <link href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link href="../../dist/css/adminlte.min.css" rel="stylesheet">
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -57,7 +88,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"
                 ><i class="fas fa-bars"></i
-                ></a>
+                    ></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a class="nav-link" href="../../index.html">Home</a>
@@ -125,7 +156,7 @@
                                     Brad Diesel
                                     <span class="float-right text-sm text-danger"
                                     ><i class="fas fa-star"></i
-                                    ></span>
+                                        ></span>
                                 </h3>
                                 <p class="text-sm">Call me whenever you can...</p>
                                 <p class="text-sm text-muted">
@@ -149,7 +180,7 @@
                                     John Pierce
                                     <span class="float-right text-sm text-muted"
                                     ><i class="fas fa-star"></i
-                                    ></span>
+                                        ></span>
                                 </h3>
                                 <p class="text-sm">I got your message bro</p>
                                 <p class="text-sm text-muted">
@@ -173,7 +204,7 @@
                                     Nora Silvester
                                     <span class="float-right text-sm text-warning"
                                     ><i class="fas fa-star"></i
-                                    ></span>
+                                        ></span>
                                 </h3>
                                 <p class="text-sm">The subject goes here</p>
                                 <p class="text-sm text-muted">
@@ -296,8 +327,8 @@
                 >
                     <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a class="nav-link active" href="#">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="#">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -309,13 +340,13 @@
                         <a class="nav-link " href="../../pages/User/Add_User.html">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Users
+                                Cars
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/User/Add_User.html">
+                                <a class="nav-link active" href="../../pages/User/Add_User.html">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add User</p>
                                 </a>
@@ -327,9 +358,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="../../pages/User/Display_User.html">
+                                <a class="nav-link" href="../../pages/User/Display_User.html">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Users List</p>
+                                    <p>Cars List</p>
                                 </a>
                             </li>
 
@@ -349,13 +380,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Users</h1>
+                        <h1 class="m-0">Cars</h1>
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Cars</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -370,68 +401,78 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-                <div class="row">
-                    <div class="col-12">
-
-
-                        <div class="card">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with default features</h3>
+                                <h3 class="card-title">Add Car</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped" id="example1">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Email</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Banned</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                    </tr>
+                            <!-- form start -->
+                            <form method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputCatg1">Categorie</label>
+                                        <input class="form-control" id="exampleInputCatg1"
+                                               placeholder="Entrer Categorie"
+                                               type="text" name="category">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputBrand1">Marque</label>
+                                        <input class="form-control" id="exampleInputBrand1" placeholder="Entrer Marque"
+                                               type="text" name="brand">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputModel1">Modele</label>
+                                        <input class="form-control" id="exampleInputModel1" placeholder="Entrer Modele"
+                                               type="text" name="model">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputCylindre1">Cylindrie</label>
+                                        <input class="form-control" id="exampleInputCylindre1" max="100"
+                                               min="1" placeholder="Entrer Cylindre" type="number" name="cylinder">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEnergie1">Energie</label>
+                                        <input class="form-control" id="exampleInputEnergie1" max="100"
+                                               min="1" placeholder="Entrer Energie" type="text" name="energy">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPF1">Puissance Fiscale</label>
+                                        <input class="form-control" id="exampleInputPF1" max="100"
+                                               min="1" placeholder="Entrer Puissance Fiscale" type="number"
+                                               name="fiscalPower">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputGB1">Boite Vitesse</label>
+                                        <input class="form-control" id="exampleInputGB1" max="100"
+                                               min="1" placeholder="Entrer Boite Vitesse" type="text" name="gearbox">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputDisp1">Matricule</label>
+                                        <input class="form-control" id="exampleInputDisp1" max="100"
+                                               min="1" placeholder="Enter Matricule" type="text" name="registerNumber">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputGuar1">Annee</label>
+                                        <input class="form-control" id="exampleInputGuar1" max="100"
+                                               min="1" placeholder="Enter Annee" type="number" name="year">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputGuar1">kilometrage</label>
+                                        <input class="form-control" id="exampleInputGuar1" max="100"
+                                               min="1" placeholder="Enter kilometrage" type="number" name="kilometers">
+                                    </div>
 
-                                    <tr>
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td>-</td>
-                                        <td>C</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>U</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Email</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Banned</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
             </div>
         </section>
@@ -484,27 +525,5 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../dist/js/pages/dashboard.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-</script>
-
 </body>
 </html>

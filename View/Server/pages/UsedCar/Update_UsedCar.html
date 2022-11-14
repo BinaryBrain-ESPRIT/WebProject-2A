@@ -1,27 +1,3 @@
-<?php
-
-include_once __DIR__ . "/../../../../Model/NewCar.php";
-include_once __DIR__ . "/../../../../Controller/NewCar.php";
-
-if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']) && isset($_POST['cylinder']) && isset($_POST['energy']) && isset($_POST['fiscalPower']) && isset($_POST['gearbox']) && isset($_POST['availability']) && isset($_POST['guarantee'])) {
-    $category = $_POST['category'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $cylinder = $_POST['cylinder'];
-    $energy = $_POST['energy'];
-    $fiscalPower = $_POST['fiscalPower'];
-    $gearbox = $_POST['gearbox'];
-    $availability = $_POST['availability'];
-    $guarantee = $_POST['guarantee'];
-
-    $car = new Model\NewCar($category, $brand, $model, $cylinder, $energy, $fiscalPower, $gearbox, $availability, $guarantee);
-    $carC = new Controller\NewCar();
-    $carC->addCar($car);
-    header('location: Add_NewCar.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -339,7 +315,7 @@ if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']
                         <a class="nav-link " href="../../pages/User/Add_User.html">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Cars
+                                Users
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -359,7 +335,7 @@ if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']
                             <li class="nav-item">
                                 <a class="nav-link" href="../../pages/User/Display_User.html">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Cars List</p>
+                                    <p>Users List</p>
                                 </a>
                             </li>
 
@@ -379,13 +355,13 @@ if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Cars</h1>
+                        <h1 class="m-0">Users</h1>
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Cars</li>
+                            <li class="breadcrumb-item active">Users</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -404,58 +380,36 @@ if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']
                     <div class="col-lg-5">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Car</h3>
+                                <h3 class="card-title">Add User</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="post">
+                            <form>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputCatg1">Categorie</label>
-                                        <input class="form-control" id="exampleInputCatg1" placeholder="Entrer Categorie"
-                                               type="text" name="category">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input class="form-control" id="exampleInputEmail1" placeholder="Enter email"
+                                               type="email">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputBrand1">Marque</label>
-                                        <input class="form-control" id="exampleInputBrand1" placeholder="Entrer Marque"
-                                               type="text" name="brand">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input class="form-control" id="exampleInputPassword1" placeholder="Password"
+                                               type="password">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputModel1">Modele</label>
-                                        <input class="form-control" id="exampleInputModel1" placeholder="Entrer Modele"
-                                               type="text" name="model">
+                                        <label for="exampleInputEmail1">Name</label>
+                                        <input class="form-control" id="exampleInputName1" placeholder="Enter Name"
+                                               type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputCylindre1">Cylindrie</label>
-                                        <input class="form-control" id="exampleInputCylindre1" max="100"
-                                               min="1" placeholder="Entrer Cylindre" type="number" name="cylinder">
+                                        <label for="exampleInputEmail1">Age</label>
+                                        <input class="form-control" id="exampleInputAge1" max="100"
+                                               min="1" placeholder="Enter Age" type="number">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEnergie1">Energie</label>
-                                        <input class="form-control" id="exampleInputEnergie1" max="100"
-                                               min="1" placeholder="Entrer Energie" type="text" name="energy">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPF1">Puissance Fiscale</label>
-                                        <input class="form-control" id="exampleInputPF1" max="100"
-                                               min="1" placeholder="Entrer Puissance Fiscale" type="number" name="fiscalPower">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputGB1">Boite Vitesse</label>
-                                        <input class="form-control" id="exampleInputGB1" max="100"
-                                               min="1" placeholder="Entrer Boite Vitesse" type="text" name="gearbox">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputDisp1">Disponibilite</label>
-                                        <input class="form-control" id="exampleInputDisp1" max="100"
-                                               min="1" placeholder="Enter Age" type="number" name="availability">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputGuar1">Guarantie</label>
-                                        <input class="form-control" id="exampleInputGuar1" max="100"
-                                               min="1" placeholder="Enter Age" type="number" name="guarantee">
-                                    </div>
-
+                                    <!--                                    <div class="form-check">-->
+                                    <!--                                        <input class="form-check-input" id="exampleCheck1" type="checkbox">-->
+                                    <!--                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+                                    <!--                                    </div>-->
                                 </div>
                                 <!-- /.card-body -->
 
