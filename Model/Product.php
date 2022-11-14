@@ -14,7 +14,7 @@ class Product
         $this->id = $id;
         $this->brand = $brand;
         $this->price = $price;
-        $this->$name = $name;
+        $this->name = $name;
     }
 
 }

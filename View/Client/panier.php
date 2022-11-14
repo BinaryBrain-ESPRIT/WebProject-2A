@@ -1,13 +1,42 @@
 <?php
 declare(strict_types=1);
 include_once __DIR__ . "/../../Controller/Cart.php";
+include_once __DIR__ . "/../../Controller/CartProduct.php";
+include_once __DIR__ . "/../../Controller/Command.php";
+include_once __DIR__ . "/../../Controller/CommandProduct.php";
 include_once __DIR__ . "/../../Model/Cart.php";
 include_once __DIR__ . "/../../Model/CartProducts.php";
+include_once __DIR__ . "/../../Model/Command.php";
+include_once __DIR__ . "/../../Model/CommandProduct.php";
 
-$cartM = new Model\Cart(1, 1);
+$cartM = new Model\Cart(1, 1, 1);
 $cartC = new Controller\Cart();
-$cartProducts = $cartC->getCartPurchases(1);
+$cartProdC = new Controller\CartProduct();
+$commandC = new Controller\Command();
+$commandProdC = new Controller\CommandProduct();
 
+$cartProducts = $cartProdC->getCartPurchases(1);
+
+$idCommand = $commandC->getCommandID(1);
+$total = 0;
+$nbItems = count($cartProducts);
+
+
+if (isset($_POST['checkout'])) {
+    foreach ($cartProducts as $cartProd) {
+        $commandProd = new Model\CommandProduct($idCommand, $cartProd['idProduct'], $cartProd['qte'], $cartProd['totalPrice']);
+        $commandProdC->addProductCommand($commandProd);
+        $cartProdC->deleteCartPurchases(1);
+
+    }
+    header("Location: panier.php");
+}
+
+if (isset($_GET['id']))
+{
+    $cartProdC->deleteCartPurchase($_GET['id']);
+    header("Location: panier.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,51 +147,66 @@ $cartProducts = $cartC->getCartPurchases(1);
             <div class="title">
                 <div class="row">
                     <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                    <div class="col align-self-center text-right text-muted">3 items</div>
+                    <div class="col align-self-center text-right text-muted"><?= $nbItems?> items</div>
                 </div>
             </div>
             <?php
-            foreach ($cartProducts as $cartProd) {
-            ?>
-            <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
+            if (count($cartProducts) > 0) foreach ($cartProducts as $cartProd) {
+                $total += $cartProd['totalPrice'];
+                ?>
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="./assets/images/roue.jpg"></div>
+                        <div class="col">
+                            <div class="row text-muted">Roue</div>
+                            <div class="row">Roue Ford Fiesta</div>
+                        </div>
+                        <div class="col">
+                            <a href="#">-</a><a href="#" class="border"><?= $cartProd['qte'] ?></a><a href="#">+</a>
+                        </div>
+                        <div class="col">&euro; <?= $cartProd["totalPrice"] ?> <a href="panier.php?id=<?= $cartProd['id']; ?>" class="close">&#10005;</a>
+                        </div>
                     </div>
-                    <div class="col">
-                        <a href="#">-</a><a href="#" class="border"><?=$cartProd['qte'] ?></a><a href="#">+</a>
-                    </div>
-                    <div class="col">&euro; <?=$cartProd["totalPrice"] ?> <a href="#" class="close">&#10005;</a></div>
                 </div>
-            </div>
-            <?php
+                <?php
+            } else {
+                ?>
+                <div class="d-flex justify-content-center" style="margin: 130px 0">
+                    <h2 class="text-info">Panier Vide</h2>
+                </div>
+                <?php
+
             }
             ?>
-
-            <div class="back-to-shop"><a href="#">&leftarrow;</a><a href="#" class="text-muted">Back to shop</a></div>
+            <div class="back-to-shop"><a href="#">&leftarrow;</a><a href="index.html" class="text-muted">Back to shop</a></div>
         </div>
         <div class="col-md-4 summary">
             <div><h5><b>Summary</b></h5></div>
             <hr>
+            <?php
+            if (isset($_POST['codePromo']) && $_POST['codePromo'] == "KarhbatiTN") {
+                $total -= $total * 0.5;
+
+            }
+            ?>
             <div class="row">
-                <div class="col" style="padding-left:0;">ITEMS 3</div>
-                <div class="col text-right">&euro; 132.00</div>
+                <div class="col" style="padding-left:0;">ITEMS: <?= $nbItems ?></div>
+                <div class="col text-right">&euro; <?= $total ?></div>
             </div>
-            <form>
-                <p>SHIPPING</p>
-                <select>
-                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-                </select>
+            <form method="post">
                 <p>GIVE CODE</p>
-                <input id="code" placeholder="Enter your code">
+                <input id="code" name="codePromo" placeholder="Enter your code">
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn-info ">Pass PromoCode</button>
+                </div>
             </form>
             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                 <div class="col">TOTAL PRICE</div>
-                <div class="col text-right">&euro; 137.00</div>
+                <div class="col text-right">&euro; <?= $total ?></div>
             </div>
-            <button class="btn">CHECKOUT</button>
+            <form method="post">
+                <button type="submit" name="checkout" class="btn">CHECKOUT</button>
+            </form>
         </div>
     </div>
 
