@@ -110,7 +110,7 @@ if (isset($_GET['id']))
                             </div>
                         </li>
                         <li><a href="maintenance.html">Maintenance</a></li>
-                        <li><a href="product.html">Piece</a></li>
+                        <li><a href="product.php">Piece</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="panier.html" class="active">Panier</a></li>
                     </ul>
