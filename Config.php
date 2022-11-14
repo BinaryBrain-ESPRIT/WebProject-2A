@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 class Config
 {
     private static $pdo = null;
@@ -9,7 +10,7 @@ class Config
         if (!isset($pdo)) {
             try {
                 self::$pdo = new PDO("mysql:host=localhost;dbname=automobile;", 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-            } catch (Exception $e) {
+            } catch (PDOException $e) {
                 die("Erreur " . $e->getMessage());
             }
         }
