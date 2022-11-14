@@ -14,7 +14,6 @@ $cartProducts = $cartC->getCartPurchases(1);
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -31,7 +30,6 @@ $cartProducts = $cartC->getCartPurchases(1);
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/cart.css">
-
 </head>
 
 <body>
@@ -48,7 +46,6 @@ $cartProducts = $cartC->getCartPurchases(1);
     </div>
 </div>
 <!-- ***** Preloader End ***** -->
-
 
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
