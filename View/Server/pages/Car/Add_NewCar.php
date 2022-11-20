@@ -431,13 +431,20 @@ if (isset($_POST['category']) && isset($_POST['brand'] )&& isset($_POST['model']
                                                min="1" placeholder="Entrer Cylindre" type="number" name="cylinder">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEnergie1">Energie</label>
-                                        <input class="form-control" id="exampleInputEnergie1" max="100"
-                                               min="1" placeholder="Entrer Energie" type="text" name="energy">
-                                    </div>
+                                    <label for="exampleInputEnergie1">Energie</label> <select class="form-control select2 select2-hidden-accessible" Energie="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected">Alabama</option>
+                                        <option>Alaska</option>
+                                        <option>California</option>
+                                        <option>Delaware</option>
+                                        <option>Tennessee</option>
+                                        <option>Texas</option>
+                                        <option>Washington</option>
+                                     
+                                        </select> </div> 
+                                    </div>  
                                     <div class="form-group">
-                                        <label for="exampleInputPF1">Puissance Fiscale</label>
-                                        <input class="form-control" id="exampleInputPF1" max="100"
+                                    <label for="exampleInputPF1">Puissance Fiscale</label>
+                                    <input class="form-control" id="exampleInputPF1" max="100"
                                                min="1" placeholder="Entrer Puissance Fiscale" type="number" name="fiscalPower">
                                     </div>
                                     <div class="form-group">
